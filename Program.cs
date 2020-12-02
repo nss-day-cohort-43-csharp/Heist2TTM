@@ -20,7 +20,7 @@ namespace Heist2TTM
             Hacker h2 = new Hacker()
             {
                 Name = "Ivar",
-                SkillLevel = 27,
+                SkillLevel = 100,
                 PercentageCut = 20
             };
 
@@ -34,7 +34,7 @@ namespace Heist2TTM
             LockSpecialist l2 = new LockSpecialist()
             {
                 Name = "Louie",
-                SkillLevel = 16,
+                SkillLevel = 100,
                 PercentageCut = 15
             };
 
@@ -48,7 +48,7 @@ namespace Heist2TTM
             Muscle m2 = new Muscle()
             {
                 Name = "Archer",
-                SkillLevel = 30,
+                SkillLevel = 100,
                 PercentageCut = 20
             };
 
@@ -132,6 +132,8 @@ namespace Heist2TTM
                 CashOnHand = generatedCashOnHand
             };
 
+            Console.WriteLine($"Bank Cash on Hand: {suntrust.CashOnHand}");
+
             List<Scores> bankScores = new List<Scores>() {
                 new Scores() {ScoreType = "Alarm Score", ScoreValue = generatedAlarmScore},
                 new Scores() {ScoreType = "Vault Score", ScoreValue = generatedVaultScore},
@@ -161,7 +163,7 @@ namespace Heist2TTM
             {
                 Console.Write("Enter Team Member Number: ");
                 string chosenCriminal = Console.ReadLine();
-                if(chosenCriminal == "")
+                if (chosenCriminal == "")
                 {
                     break;
                 }
@@ -175,7 +177,7 @@ namespace Heist2TTM
 
                 foreach (IRobber criminal in team)
                 {
-                    if(criminal.PercentageCut <= cutTotal)
+                    if (criminal.PercentageCut <= cutTotal)
                     {
                         Console.Write(team.IndexOf(criminal));
                         Console.Write($". {criminal.Name}");
@@ -189,7 +191,23 @@ namespace Heist2TTM
             }
             foreach (IRobber member in crew)
             {
-                Console.WriteLine(member.Name);
+                member.PerformSkill(suntrust);
+            }
+
+            if (suntrust.IsSecure)
+            {
+                Console.WriteLine("Failure. You have brought shame on yourself and your family!");
+            }
+            else
+            {
+                Console.WriteLine("Success! You robbed a bank, good job loser.");
+
+                foreach (IRobber member in crew)
+                {
+                    Console.WriteLine($"{member.Name} gets ${Convert.ToDouble(suntrust.CashOnHand) * (Convert.ToDouble(member.PercentageCut) / 100)}");
+                }
+
+                Console.WriteLine($"You Get ${Convert.ToDouble(suntrust.CashOnHand) * (Convert.ToDouble(cutTotal) / 100)}");
             }
         }
 
