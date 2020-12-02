@@ -142,11 +142,17 @@ namespace Heist2TTM
 
             Console.WriteLine($"The strongest point is the {ScoreList.First().ScoreType} and the weakest point is the {ScoreList.Last().ScoreType}");
 
+            foreach (IRobber criminal in team)
+            {
+                Console.Write(team.IndexOf(criminal));
+                Console.Write($". {criminal.Name}");
+                Console.Write($": {criminal.Specialty}");
+                Console.Write($" has a skill level of {criminal.SkillLevel}");
+                Console.Write($", and a {criminal.PercentageCut}% cut.");
+                Console.WriteLine("");
+
+            }
         }
-        public class Scores
-        {
-            public string ScoreType { get; set; }
-            public int ScoreValue { get; set; }
-        }
+
     }
 }
