@@ -60,54 +60,61 @@ namespace Heist2TTM
         }
         static void BeginHeist(List<IRobber> team)
         {
+            string enteredName = "";
             Console.WriteLine($"Current number of operatives: {team.Count}");
             Console.Write("Enter new team member name: ");
-            string enteredName = Console.ReadLine();
-            Console.Write(@"Choose a specialty: 
+            enteredName = Console.ReadLine();
+            while(enteredName != "")
+            {
+                Console.Write(@"Choose a specialty: 
 1) Hacker (Disables alarms)
 2) Muscle (Disables/murders guards)
 3) Lock Specialist (Cracks the vault): ");
-            int enteredType = int.Parse(Console.ReadLine());
-            Console.Write("Enter a skill level (1-100): ");
-            int enteredSkill = int.Parse(Console.ReadLine());
-            Console.Write("Enter the percentage of cut: ");
-            int enteredCut = int.Parse(Console.ReadLine());
+                int enteredType = int.Parse(Console.ReadLine());
+                Console.Write("Enter a skill level (1-100): ");
+                int enteredSkill = int.Parse(Console.ReadLine());
+                Console.Write("Enter the percentage of cut: ");
+                int enteredCut = int.Parse(Console.ReadLine());
 
-            if (enteredType == 1)
-            {
-                Hacker robber1 = new Hacker()
+                if (enteredType == 1)
                 {
-                    Name = enteredName,
-                    SkillLevel = enteredSkill,
-                    PercentageCut = enteredCut
-                };
-                team.Add(robber1);
+                    Hacker robber1 = new Hacker()
+                    {
+                        Name = enteredName,
+                        SkillLevel = enteredSkill,
+                        PercentageCut = enteredCut
+                    };
+                    team.Add(robber1);
 
-            }
-            if (enteredType == 2)
-            {
-                Muscle robber1 = new Muscle()
+                }
+                if (enteredType == 2)
                 {
-                    Name = enteredName,
-                    SkillLevel = enteredSkill,
-                    PercentageCut = enteredCut
-                };
-                team.Add(robber1);
+                    Muscle robber1 = new Muscle()
+                    {
+                        Name = enteredName,
+                        SkillLevel = enteredSkill,
+                        PercentageCut = enteredCut
+                    };
+                    team.Add(robber1);
 
-            }
-            if (enteredType == 3)
-            {
-                LockSpecialist robber1 = new LockSpecialist()
+                }
+                if (enteredType == 3)
                 {
-                    Name = enteredName,
-                    SkillLevel = enteredSkill,
-                    PercentageCut = enteredCut
-                };
-                team.Add(robber1);
-            }
-            foreach (IRobber criminal in team)
-            {
-                Console.WriteLine(criminal.Name);
+                    LockSpecialist robber1 = new LockSpecialist()
+                    {
+                        Name = enteredName,
+                        SkillLevel = enteredSkill,
+                        PercentageCut = enteredCut
+                    };
+                    team.Add(robber1);
+                }
+                foreach (IRobber criminal in team)
+                {
+                    Console.WriteLine(criminal.Name);
+                }
+                Console.WriteLine($"Current number of operatives: {team.Count}");
+                Console.Write("Enter new team member name: ");
+                enteredName = Console.ReadLine();
             }
 
         }
