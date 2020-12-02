@@ -152,6 +152,45 @@ namespace Heist2TTM
                 Console.WriteLine("");
 
             }
+
+            List<IRobber> crew = new List<IRobber>();
+
+            int cutTotal = 100;
+            int foreverZero = 0;
+            while (foreverZero == 0)
+            {
+                Console.Write("Enter Team Member Number: ");
+                string chosenCriminal = Console.ReadLine();
+                if(chosenCriminal == "")
+                {
+                    break;
+                }
+                int criminalIndex = Int32.Parse(chosenCriminal);
+                crew.Add(team[criminalIndex]);
+
+                cutTotal = cutTotal - team[criminalIndex].PercentageCut;
+                Console.WriteLine($"Cut Remaining: {cutTotal}");
+
+                team.RemoveAt(criminalIndex);
+
+                foreach (IRobber criminal in team)
+                {
+                    if(criminal.PercentageCut <= cutTotal)
+                    {
+                        Console.Write(team.IndexOf(criminal));
+                        Console.Write($". {criminal.Name}");
+                        Console.Write($": {criminal.Specialty}");
+                        Console.Write($" has a skill level of {criminal.SkillLevel}");
+                        Console.Write($", and a {criminal.PercentageCut}% cut.");
+                        Console.WriteLine("");
+                    }
+                }
+
+            }
+            foreach (IRobber member in crew)
+            {
+                Console.WriteLine(member.Name);
+            }
         }
 
     }
